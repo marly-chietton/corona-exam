@@ -62,6 +62,9 @@ class Population:
         return li
 
     def __str__(self):
+        # à optimiser car à chaque fois que tu appelles la fonction statSante tu fais un parcours de liste
+        # et donc ici il faudrait trouver une meilleure façon de faire
+        # je propose que la fonction statSante remplisse un dict
         return ("Jours:" + str(self.jour)+"\n Population de "+str(self.n)+" citoyens"+"\n Sains:"+str(self.statSante()[0])+"\n Malades:"+str(self.statSante()[1])+"\n Critiques:"+str(self.statSante()[2])+"\n Immunises:"+str(self.statSante()[3]))
 
     def infection(self,D,Pi,Pc):
