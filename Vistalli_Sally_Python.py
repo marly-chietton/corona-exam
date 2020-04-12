@@ -44,9 +44,13 @@ class Population:
         self.Pc = 0
         self.nContactInf = 0
         self.n = n
-        self.lPop = []
-        for i in range(n):
-            self.lPop.append(Citoyen())
+        self.lPop = [Citoyen() for i in range(n)]
+        self.store = {
+            "sain": 0,
+            "malade": 0,
+            "critique": 0,
+            "immunise": 0,
+        }
 
     def statSante(self):
         li = [0]*4
@@ -59,13 +63,14 @@ class Population:
                 li[2]+=1
             else:
                 li[3]+=1
+        self.store["sain"] = li[0]
+        self.store["malade"] = li[1]
+        self.store["critique"] = li[2]
+        self.store["immunise"] = li[3]
         return li
 
     def __str__(self):
-        # à optimiser car à chaque fois que tu appelles la fonction statSante tu fais un parcours de liste
-        # et donc ici il faudrait trouver une meilleure façon de faire
-        # je propose que la fonction statSante remplisse un dict
-        return ("Jours:" + str(self.jour)+"\n Population de "+str(self.n)+" citoyens"+"\n Sains:"+str(self.statSante()[0])+"\n Malades:"+str(self.statSante()[1])+"\n Critiques:"+str(self.statSante()[2])+"\n Immunises:"+str(self.statSante()[3]))
+        return ("Jours:" + str(self.jour)+"\n Population de "+str(self.n)+" citoyens"+"\n Sains:"+str(self.store["sain"])+"\n Malades:"+str(self.store["malade"])+"\n Critiques:"+str(self.store["critique"])+"\n Immunises:"+str(self.store["immunise"]))
 
     def infection(self,D,Pi,Pc):
         self.D = D
